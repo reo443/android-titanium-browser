@@ -30,6 +30,7 @@ for flag in "align-wakeups" "android-bottom-bar" "cct-open-in-browser-button-if-
 done
 sed -i 's|newFlag(OmniboxFeatureList.OMNIBOX_SITE_SEARCH, FeatureState.ENABLED_IN_TEST);|newFlag(OmniboxFeatureList.OMNIBOX_SITE_SEARCH, FeatureState.ENABLED_IN_PROD);|' components/omnibox/common/android/java/src/org/chromium/components/omnibox/OmniboxFeatures.java # search
 sed -i 's|BASE_FEATURE(kOmniboxSiteSearch, DISABLED);|BASE_FEATURE(kOmniboxSiteSearch, ENABLED);|' components/omnibox/common/omnibox_features.cc # search
+sed -i '/if (templateUrl.getPrepopulateId() > 0) {/,/^        }$/d' chrome/browser/search_engines/android/java/src/org/chromium/chrome/browser/search_engines/settings/custom_search_engine/EditSearchEngineDialogCoordinator.java # search: allow editing prepopulated engine URL templates
 
 sed -i '/#if BUILDFLAG(IS_DESKTOP_ANDROID)/{
 a\
