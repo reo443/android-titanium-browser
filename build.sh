@@ -38,8 +38,8 @@ cp $SCRIPT_DIR/args.gn out/Default/args.gn
 gn gen out/Default # gn args out/Default; echo 'treat_warnings_as_errors = false' >> out/Default/args.gn
 mkdir -p out/tmp out/release
 
-# GitHub-hosted runners can exhaust memory with Chromium's default parallelism.
-autoninja -C out/Default -j 2 chrome_public_apk
+# Match GitHub-hosted runners' four vCPUs while avoiding excessive parallelism.
+autoninja -C out/Default -j 4 chrome_public_apk
 mv $(find out/Default/apks -name 'Chrome*.apk') out/tmp/$VERSION-armeabi-v7a.apk
 
 export PATH=$PWD/third_party/jdk/current/bin/:$PATH
